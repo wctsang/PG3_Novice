@@ -1,6 +1,7 @@
+#include "GameManager.h"
 #include <Novice.h>
 
-const char kWindowTitle[] = "学籍番号";
+const char kWindowTitle[] = "GC2C_05_ソウ_イチョウ_PG3";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -12,39 +13,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
-	// ウィンドウの×ボタンが押されるまでループ
-	while (Novice::ProcessMessage() == 0) {
-		// フレームの開始
-		Novice::BeginFrame();
+	///
+	/// ↓更新処理ここから
+	///
 
-		// キー入力を受け取る
-		memcpy(preKeys, keys, 256);
-		Novice::GetHitKeyStateAll(keys);
+	GameManager* gameManager = new GameManager();
 
-		///
-		/// ↓更新処理ここから
-		///
+	gameManager->Run(keys, preKeys);
 
-		///
-		/// ↑更新処理ここまで
-		///
+	///
+	/// ↑更新処理ここまで
+	///
 
-		///
-		/// ↓描画処理ここから
-		///
+	///
+	/// ↓描画処理ここから
+	///
 
-		///
-		/// ↑描画処理ここまで
-		///
+	///
+	/// ↑描画処理ここまで
+	///
 
-		// フレームの終了
-		Novice::EndFrame();
-
-		// ESCキーが押されたらループを抜ける
-		if (preKeys[DIK_ESCAPE] == 0 && keys[DIK_ESCAPE] != 0) {
-			break;
-		}
-	}
+	// フレームの終了
 
 	// ライブラリの終了
 	Novice::Finalize();
